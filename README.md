@@ -39,4 +39,4 @@ This project is licensed under the [MIT License](LICENSE). You are free to use, 
 
 ## 🌟 About Me
 
-Hello! I'm **Noah Merlin**. I currently work in healthcare as a Systems Operations Analyst. A couple of years ago I realized I had a passion for data. Since then, I have been focused on learning as much as I can about the data pipeline and the roles everyone plays along the way. This project not only deepened my knowledge, it has given me some new tools and insights to bring to my next role!
+Hello! I'm **Noah Merlin**. I currently work in healthcare as a Systems Operations Analyst. A couple of years ago I realized I had a real passion for data. Since then, I have focused myself on learning as much as I can about the data pipeline and the roles everyone plays along the way. This project not only deepened my knowledge, it has given me some great new tools and insights to bring to my next role!
