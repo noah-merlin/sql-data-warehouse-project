@@ -42,3 +42,4 @@ SELECT DISTINCT cst_gndr
 FROM bronze.crm_cust_info
 
 -- after, quality check silver tables to verify quality of data in the silver layer
+-- replace 'bronze' with 'silver'
