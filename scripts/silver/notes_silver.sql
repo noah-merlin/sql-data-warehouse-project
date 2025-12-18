@@ -89,6 +89,8 @@
   FROM bronze.crm_prd_info
   WHERE prd_end_dt < prd_start_dt
 
+-- check tables we are joining as we write transformations
+-- adjust ddl as needed (add columns, change datatypes, etc.)
 -- for complex transformations in SQL, narrow it down to a specific example and brainstorm multiple solution approaches
 
 -- after truncate + insert, quality check silver tables to verify quality of data in the silver layer
