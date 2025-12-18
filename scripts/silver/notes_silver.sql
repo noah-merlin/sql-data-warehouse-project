@@ -112,7 +112,7 @@
   WHERE sls_order_dt <= 0 
 	OR LEN(sls_order_dt) != 8
 	OR sls_order_dt < 19000101 -- business start date
-	OR sls_order_dt < 20500101 -- future date (case by case)
+	OR sls_order_dt > 20500101 -- future date (case by case)
   
   -- check for nulls or negative numbers
     -- sls_cust_id, sls_sales, sls_quantity, sls_price
