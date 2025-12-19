@@ -150,7 +150,7 @@
 	sls_quantity,
 	sls_price
 
--- erp _cust_az12
+-- erp_cust_az12
 
 -- erp_loc_a101
 
