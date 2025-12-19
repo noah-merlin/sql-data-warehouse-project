@@ -105,15 +105,22 @@
   -- (negative numbers or 0s can't be cast to a date)
   -- (in this scenario, length of date must be 8)
   -- (check for outliers by validating the boundaries of the date range)
-  -- (order date must be before the shipping or due date)
 
   SELECT sls_order_dt
   -- NULLIF(sls_order_dt, 0) AS sls_order_dt - convert 0s to NULL
   FROM bronze.crm_sales_details
   WHERE sls_order_dt <= 0 
-	OR LEN(sls_order_dt) != 8
-	OR sls_order_dt < 19000101 -- business start date
-	OR sls_order_dt > 20500101 -- future date (case by case)
+	OR  LEN(sls_order_dt) != 8
+	OR  sls_order_dt < 19000101 -- business start date
+	OR  sls_order_dt > 20500101 -- future date (case by case)
+
+  -- check for invalid date orders
+  -- (order date must always be before the shipping or due date)
+
+  SELECT *
+  FROM bronze.crm_sales_details
+  WHERE sls_order_dt > sls_ship_dt
+	OR  sls_order_dt > sls_due_dt
   
   -- check for nulls or negative numbers
     -- sls_cust_id, sls_sales, sls_quantity, sls_price
