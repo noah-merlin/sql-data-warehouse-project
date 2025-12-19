@@ -150,6 +150,12 @@
 	sls_quantity,
 	sls_price
 
+-- erp _cust_az12
+
+-- erp_loc_a101
+
+-- erp_px_cat_g1v2
+
 
 -- check tables we are joining as we write transformations
 -- adjust ddl as needed (add columns, change datatypes, etc.)
