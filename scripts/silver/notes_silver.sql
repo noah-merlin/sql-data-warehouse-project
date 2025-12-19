@@ -105,6 +105,7 @@
   -- (negative numbers or 0s can't be cast to a date)
   -- (in this scenario, length of date must be 8)
   -- (check for outliers by validating the boundaries of the date range)
+  -- (order date must be before the shipping or due date)
 
   SELECT sls_order_dt
   -- NULLIF(sls_order_dt, 0) AS sls_order_dt - convert 0s to NULL
