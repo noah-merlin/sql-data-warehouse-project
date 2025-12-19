@@ -99,6 +99,14 @@
   SELECT sls_ord_num
   FROM bronze.crm_sales_details
   WHERE sls_ord_num != TRIM(sls_ord_num)
+
+  -- check for nulls or negative numbers
+    -- sls_cust_id
+  -- expectation: no results
+
+  SELECT sls_cust_id
+  FROM bronze.crm_sales_details
+  WHERE sls_cust_id < 0 OR sls_cust_id IS NULL
     
   -- check for invalid dates
     -- sls_order_dt, sls_ship_dt, sls_due_dt
@@ -122,13 +130,18 @@
   WHERE sls_order_dt > sls_ship_dt
 	OR  sls_order_dt > sls_due_dt
   
-  -- check for nulls or negative numbers
-    -- sls_cust_id, sls_sales, sls_quantity, sls_price
-  -- expectation: no results
+  -- business rule: sales = quantity * price
+  -- negative, 0, NULL not allowed
+	  -- sls_sales, sls_quantity, sls_price
 
-  SELECT sls_cust_id
+  SELECT *
   FROM bronze.crm_sales_details
-  WHERE sls_cust_id < 0 OR sls_cust_id IS NULL
+  WHERE sls_sales != sls_quantity * sls_price
+
+  SELECT *
+  FROM bronze.crm_sales_details
+  WHERE sls_sales <= 0
+	OR sls_sales IS NULL
 
 
 -- check tables we are joining as we write transformations
