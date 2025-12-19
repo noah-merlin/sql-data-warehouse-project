@@ -132,16 +132,23 @@
   
   -- business rule: sales = quantity * price
   -- negative, 0, NULL not allowed
-	  -- sls_sales, sls_quantity, sls_price
+  -- if sales is negative, 0, or NULL, derive using quantity and price
+  -- if price is 0 or NULL, calculate using sales and quantity
+	-- if price is negative, convert to positive value
 
-  SELECT *
+  SELECT 
+	sls_sales,
+	sls_quantity,
+	sls_price
   FROM bronze.crm_sales_details
   WHERE sls_sales != sls_quantity * sls_price
-
-  SELECT *
-  FROM bronze.crm_sales_details
-  WHERE sls_sales <= 0
-	OR sls_sales IS NULL
+	OR (sls_sales <= 0 OR sls_sales IS NULL)
+	OR (sls_quantity <= 0 OR sls_quantity IS NULL)
+	OR (sls_price <= 0 OR sls_price IS NULL)
+  ORDER BY
+	sls_sales,
+	sls_quantity,
+	sls_price
 
 
 -- check tables we are joining as we write transformations
