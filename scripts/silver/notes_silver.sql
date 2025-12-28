@@ -152,6 +152,49 @@
 
 -- erp_cust_az12
 
+  -- check for nulls or duplicates in primary key
+	-- cid
+  -- expectation: no results
+	
+  SELECT
+  	cid,
+  COUNT(*)
+  FROM bronze.erp_cust_az12
+  GROUP BY cid
+  HAVING COUNT(*) > 1 OR cid IS NULL
+	
+  -- check integrity of primary keys as they relate to other tables
+	
+  SELECT cid
+  FROM bronze.erp_cust_az12
+  WHERE CASE WHEN cid LIKE 'NAS%'
+	THEN SUBSTRING(cid, 4, LEN(cid))
+	ELSE cid
+  END
+  NOT IN (
+	SELECT DISTINCT cst_key FROM silver.crm_cust_info)
+	
+  -- check for unwanted spaces in string values
+	-- cid
+  -- expectation: no results
+	
+  SELECT cid
+  FROM bronze.erp_cust_az12
+  WHERE cid != TRIM(cid)
+	
+  -- check for out-of-range dates
+	
+  SELECT DISTINCT
+  bdate
+  FROM bronze.erp_cust_az12
+  WHERE bdate < '1924-01-01' OR bdate > GETDATE()
+	
+  -- check the consistency of values in low cardinality columns
+	-- prd_line
+	
+  SELECT DISTINCT gen
+  FROM bronze.erp_cust_az12
+
 -- erp_loc_a101
 
 -- erp_px_cat_g1v2
