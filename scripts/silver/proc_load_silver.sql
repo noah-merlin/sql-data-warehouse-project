@@ -219,7 +219,7 @@ BEGIN
     		cntry
     	)
     	SELECT
-    		REPLACE(cid, '-', '') AS cid, 
+    		REPLACE(cid, '-', '') AS cid, -- handle invalid values as they relate to other tables
     		CASE
     			WHEN TRIM(cntry) = 'DE' THEN 'Germany'
     			WHEN TRIM(cntry) IN ('US', 'USA') THEN 'United States'
