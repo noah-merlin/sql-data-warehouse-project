@@ -190,12 +190,28 @@
   WHERE bdate < '1924-01-01' OR bdate > GETDATE()
 	
   -- check the consistency of values in low cardinality columns
-	-- prd_line
+	-- gen
 	
   SELECT DISTINCT gen
   FROM bronze.erp_cust_az12
 
 -- erp_loc_a101
+
+  -- check integrity of primary keys as they relate to other tables
+  
+  SELECT 
+  REPLACE(cid, '-', '') AS cid
+  FROM bronze.erp_loc_a101
+  WHERE REPLACE(cid, '-', '')
+  NOT IN (
+  	SELECT DISTINCT cst_key FROM silver.crm_cust_info)
+
+  -- check the consistency of values in low cardinality columns
+    -- cntry
+  
+  SELECT DISTINCT cntry
+  FROM bronze.erp_loc_a101
+  ORDER BY cntry
 
 -- erp_px_cat_g1v2
 
