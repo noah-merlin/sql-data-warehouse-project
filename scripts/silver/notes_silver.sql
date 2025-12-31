@@ -239,7 +239,7 @@
   WHERE cat != TRIM(cat)
 
   -- check the consistency of values in low cardinality columns
-    -- maintenance
+    -- cat, subcat, maintenance
   
   SELECT DISTINCT maintenance
   FROM bronze.erp_px_cat_g1v2
