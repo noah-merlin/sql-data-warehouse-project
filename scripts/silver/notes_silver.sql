@@ -222,6 +222,29 @@
 
 -- erp_px_cat_g1v2
 
+  -- check integrity of primary keys as they relate to other tables
+  
+  SELECT *
+  FROM bronze.erp_px_cat_g1v2
+  WHERE id
+  NOT IN (
+  	SELECT DISTINCT cat_id FROM silver.crm_prd_info)
+
+  -- check for unwanted spaces in string values
+    -- cat, subcat, maintenance
+  -- expectation: no results
+
+  SELECT cat
+  FROM bronze.erp_px_cat_g1v2
+  WHERE cat != TRIM(cat)
+
+  -- check the consistency of values in low cardinality columns
+    -- maintenance
+  
+  SELECT DISTINCT maintenance
+  FROM bronze.erp_px_cat_g1v2
+  ORDER BY maintenance
+
 
 -- check tables we are joining as we write transformations
 -- adjust ddl as needed (add columns, change datatypes, etc.)
